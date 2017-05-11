@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+<div ng-controller="searchControl">
+    <input ng-model="personV.name" type="text" class="form-control" placeholder="Name" />
+    <br/>
+    <select ng-model="personV.sex" class="form-control" id="sex">
+        <option>男</option>
+        <option>女</option>
+    </select>
+    <br/>
+    <input ng-model="personV.interest" type="text" class="form-control" placeholder="Interest" />
+    <br/>
+    <button ng-click="search()" type="submit" class="btn btn-default">查询</button>
+    <hr/>
+
+    <!-- 表格 -->
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="20%">日期</th>
+                        <th width="14%">姓名</th>
+                        <th width="8%">性别</th>
+                        <th>爱好</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="initPageSize == 0"><td  colspan="4"><h1>搜索无结果</h1></td></tr>
+                    <tr ng-if="initPageSize &gt; 0" ng-repeat="person in persons">
+                        <td>{{person.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{person.name}}</td>
+                        <td>{{person.sex}}</td>
+                        <td ng-bind-html="person.interest"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <nav aria-label="">
+        <ul class="pager">
+            <li><button ng-disabled="personV.pageNo &lt; 2" ng-click="prevPage()" type="button" class="btn btn-sm btn-default">上一页</button></li>
+            <span>当前第（<span style="color: #00be67;font-weight: 600;" ng-bind="personV.pageNo"></span>）页</span>
+            <li><button ng-disabled="initPageSize &lt; 10" ng-click="nextPage()" type="button" class="btn btn-sm btn-default">下一页</button></li>
+        </ul>
+    </nav>
+</div>
+
+</body>
+</html>

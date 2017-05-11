@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <title>index</title>
+
+    <link rel="icon" th:href="@{/img/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <meta name="ctx" id="_ctx" th:content="${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName()
+        + ':' + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath() }" />
+    <script>
+        window.qbian = {};
+        qbian._ctx = document.getElementById('_ctx').attributes['content'].value;
+    </script>
+
+</head>
+<body ng-app="app" ng-controller="mainControl" ng-init="init()">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ElasticSearch Demo</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#" ng-click="tabClick('./fragments/add-data.html')">添加数据</a></li>
+                    <li><a href="#" ng-click="tabClick('./fragments/search-data.html')">搜索数据</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div  ng-include="content"></div>
+        </div>
+    </div>
+
+
+
+
+    <script th:src="@{/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/angular/angular.min.js}"></script>
+    <script th:src="@{/js/angular/angular-resource.js}"></script>
+    <script th:src="@{/js/angular/angular-sanitize.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <script>
+        $(function () {
+
+            $('.navbar-nav > li').on('click', function () {
+                $('.navbar-nav > li').removeClass('active');
+                $(this).addClass('active');
+            });
+
+        });
+    </script>
+</body>
+</html>
